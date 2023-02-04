@@ -113,9 +113,9 @@ bot.telegram.getMe().then((botInfo) => {
   bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "HELLO, I'M ONLINE AND READY TO SERVE" + "`", { parse_mode: "Markdown" });
 });
 
-const interval = setInterval(() => {
-  bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "THIS IS A NOTIFICATION TO KEEP BOT ALIVE, EXECUTED EVERY 30 MINUTES." + "`", { parse_mode: "Markdown" });
-}, 1000 * 60 * 30); // ping every 30 minutes
+// const interval = setInterval(() => {
+//   bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "THIS IS A NOTIFICATION TO KEEP BOT ALIVE, EXECUTED EVERY 30 MINUTES." + "`", { parse_mode: "Markdown" });
+// }, 1000 * 60 * 30); // ping every 30 minutes
 
 bot.catch(async (error, ctx) => {
   const msgError = `[ERROR] ${getCurrentDateTime()} | Lỗi xảy ra khi thực hiện request:`;
@@ -126,14 +126,14 @@ bot.catch(async (error, ctx) => {
 
 // Enable graceful stop
 process.once("SIGINT", () => {
-  clearInterval(interval);
+  //clearInterval(interval);
   console.log("[INFO] " + getCurrentDateTime() + " | APP IS CLOSING");
   bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "APP IS CLOSING, I WILL BE OFFLINE AFTER THIS MESSAGE" + "`", { parse_mode: "Markdown" });
   bot.stop("SIGINT");
 });
 
 process.once("SIGTERM", () => {
-  clearInterval(interval);
+  //clearInterval(interval);
   console.log("[INFO] " + getCurrentDateTime() + " | APP IS CLOSING");
   bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "APP IS CLOSING, I WILL BE OFFLINE AFTER THIS MESSAGE" + "`", { parse_mode: "Markdown" });
   bot.stop("SIGTERM");
