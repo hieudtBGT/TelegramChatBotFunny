@@ -108,14 +108,14 @@ if (process.env.environment == "PRODUCTION") {
     },
   });
   bot.telegram.getMe().then((botInfo) => {
-    console.info(`The bot ${bot.botInfo.username} is running on server`);
+    console.info(`The bot ${botInfo.username} is running on server`);
     bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "HELLO, I'M ONLINE AND READY TO SERVE" + "`", { parse_mode: "Markdown" });
   });
 } else {
   // if local use Long-polling
   bot.launch();
   bot.telegram.getMe().then((botInfo) => {
-    console.info(`The bot ${bot.botInfo.username} is running locally`);
+    console.info(`The bot ${botInfo.username} is running locally`);
     bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "HELLO, I'M ONLINE AND READY TO SERVE" + "`", { parse_mode: "Markdown" });
   });
 }
