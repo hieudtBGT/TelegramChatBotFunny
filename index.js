@@ -100,11 +100,11 @@ const interval = setInterval(() => {
   bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "THIS IS A NOTIFICATION TO KEEP BOT ALIVE, EXECUTED EVERY 30 MINUTES." + "`", { parse_mode: "Markdown" });
 }, 1000 * 60 * 30); // ping every 30 minutes
 
-if (process.env.environment == "PRODUCTION") {
+if (process.env.NODE_ENV == "PRODUCTION") {
   bot.launch({
     webhook: {
       domain: process.env.DOMAIN,
-      port: process.env.PORT || 8000,
+      port: process.env.PORT || 443,
     },
   });
   bot.telegram.getMe().then((botInfo) => {
