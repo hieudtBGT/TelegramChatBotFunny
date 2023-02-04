@@ -101,21 +101,23 @@ const interval = setInterval(() => {
 }, 1000 * 60 * 30); // ping every 30 minutes
 
 if (process.env.NODE_ENV == "PRODUCTION") {
-  bot.launch({
-    webhook: {
-      domain: process.env.DOMAIN,
-      port: process.env.PORT || 443,
-    },
-  });
-  bot.telegram.getMe().then((botInfo) => {
-    console.info(`The bot ${botInfo.username} is running on server`);
-    bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "HELLO, I'M ONLINE AND READY TO SERVE" + "`", { parse_mode: "Markdown" });
-  });
+  console.log("PRODUCTION DETECTED");
+  bot
+    .launch({
+      webhook: {
+        domain: process.env.DOMAIN,
+        port: process.env.PORT || 443,
+      },
+    })
+    .then(() => {
+      console.info(`The bot ${bot.botInfo.username} is running on server`);
+      bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "HELLO, I'M ONLINE AND READY TO SERVE" + "`", { parse_mode: "Markdown" });
+    });
 } else {
+  console.log("DEVELOPMENT DETECTED");
   // if local use Long-polling
-  bot.launch();
-  bot.telegram.getMe().then((botInfo) => {
-    console.info(`The bot ${botInfo.username} is running locally`);
+  bot.launch().then(() => {
+    console.info(`The bot ${bot.botInfo.username} is running locally`);
     bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "HELLO, I'M ONLINE AND READY TO SERVE" + "`", { parse_mode: "Markdown" });
   });
 }
