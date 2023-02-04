@@ -96,31 +96,26 @@ bot.command("q", async (ctx) => {
   await ctx.reply(responseGPT.text, { reply_to_message_id: ctx.message.message_id });
 });
 
+if (process.env.NODE_ENV == "PRODUCTION") {
+  bot.launch({
+    webhook: {
+      domain: process.env.DOMAIN,
+      port: process.env.PORT || 443,
+    },
+  });
+  console.log("[INFO] " + getCurrentDateTime() + " | APP IS RUNNING - PRODUCTION DETECTED");
+} else {
+  bot.launch(); // if local use Long-polling
+  console.log("[INFO] " + getCurrentDateTime() + " | APP IS RUNNING - DEVELOPMENT DETECTED");
+}
+
+bot.telegram.getMe().then((botInfo) => {
+  bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "HELLO, I'M ONLINE AND READY TO SERVE" + "`", { parse_mode: "Markdown" });
+});
+
 const interval = setInterval(() => {
   bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "THIS IS A NOTIFICATION TO KEEP BOT ALIVE, EXECUTED EVERY 30 MINUTES." + "`", { parse_mode: "Markdown" });
 }, 1000 * 60 * 30); // ping every 30 minutes
-
-if (process.env.NODE_ENV == "PRODUCTION") {
-  console.log("PRODUCTION DETECTED");
-  bot
-    .launch({
-      webhook: {
-        domain: process.env.DOMAIN,
-        port: process.env.PORT || 443,
-      },
-    })
-    .then(() => {
-      console.info(`The bot ${bot.botInfo.username} is running on server`);
-      bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "HELLO, I'M ONLINE AND READY TO SERVE" + "`", { parse_mode: "Markdown" });
-    });
-} else {
-  console.log("DEVELOPMENT DETECTED");
-  // if local use Long-polling
-  bot.launch().then(() => {
-    console.info(`The bot ${bot.botInfo.username} is running locally`);
-    bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "HELLO, I'M ONLINE AND READY TO SERVE" + "`", { parse_mode: "Markdown" });
-  });
-}
 
 bot.catch(async (error, ctx) => {
   const msgError = `[ERROR] ${getCurrentDateTime()} | Lỗi xảy ra khi thực hiện request:`;
@@ -132,12 +127,14 @@ bot.catch(async (error, ctx) => {
 // Enable graceful stop
 process.once("SIGINT", () => {
   clearInterval(interval);
+  console.log("[INFO] " + getCurrentDateTime() + " | APP IS CLOSING");
   bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "APP IS CLOSING, I WILL BE OFFLINE AFTER THIS MESSAGE" + "`", { parse_mode: "Markdown" });
   bot.stop("SIGINT");
 });
 
 process.once("SIGTERM", () => {
   clearInterval(interval);
+  console.log("[INFO] " + getCurrentDateTime() + " | APP IS CLOSING");
   bot.telegram.sendMessage(MY_HANDLER_GROUP, "`" + "APP IS CLOSING, I WILL BE OFFLINE AFTER THIS MESSAGE" + "`", { parse_mode: "Markdown" });
   bot.stop("SIGTERM");
 });
