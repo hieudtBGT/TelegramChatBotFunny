@@ -57,7 +57,7 @@ bot.use(async (ctx, next) => {
 bot.command("myid", async (ctx) => {
   const currentChatId = ctx.message.chat.id;
 
-  if (WHITE_LIST_CHAT_ID.includes(currentChatId) === false) {
+  if (WHITE_LIST_CHAT_ID.includes(currentChatId.toString()) === false) {
     await ctx.telegram.sendMessage(MY_HANDLER_GROUP, warningMessageToActiveGroup(ctx.message.from, "/myid"), { parse_mode: "Markdown" });
     return;
   }
@@ -69,7 +69,7 @@ bot.command("myid", async (ctx) => {
 bot.command("q", async (ctx) => {
   const currentChatId = ctx.message.chat.id;
 
-  if (WHITE_LIST_CHAT_ID.includes(currentChatId) === false) {
+  if (WHITE_LIST_CHAT_ID.includes(currentChatId.toString()) === false) {
     await ctx.telegram.sendMessage(MY_HANDLER_GROUP, warningMessageToActiveGroup(ctx.message.from, ctx.message.text), { parse_mode: "Markdown" });
     return;
   }
