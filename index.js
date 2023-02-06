@@ -104,12 +104,15 @@ bot.command("q", async (ctx) => {
 
   if (conversationObj.conversationId === "") {
     console.log(`[INFO] ${getCurrentDateTime()} | ${ctx.message.chat.title} | ${ctx.message.chat.id} | START CONVERSATION`);
-    responseGPT = await apiGPT.sendMessage(userQuestion);
+    responseGPT = await apiGPT.sendMessage(userQuestion, {
+      timeoutMs: 3 * 60 * 1000,
+    });
   } else {
     console.log(`[INFO] ${getCurrentDateTime()} | ${ctx.message.chat.title} | ${ctx.message.chat.id} | TRACKING CONVERSATION`);
     responseGPT = await apiGPT.sendMessage(userQuestion, {
       conversationId: conversationObj.conversationId,
       parentMessageId: conversationObj.parentMessageId,
+      timeoutMs: 3 * 60 * 1000,
     });
   }
   conversationObj.conversationId = responseGPT.conversationId;
