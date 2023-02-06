@@ -115,7 +115,7 @@ bot.command("q", async (ctx) => {
   conversationObj.conversationId = responseGPT.conversationId;
   conversationObj.parentMessageId = responseGPT.id;
 
-  await ctx.reply(responseGPT.text, { reply_to_message_id: ctx.message.message_id });
+  await ctx.reply(responseGPT.text, { reply_to_message_id: ctx.message.message_id, parse_mode: "Markdown" });
 });
 
 bot.catch(async (error, ctx) => {
