@@ -11,7 +11,7 @@ const MY_HANDLER_GROUP = process.env.HANDLER_GROUP;
 const WHITE_LIST_CHAT_ID = [process.env.MY_ID, process.env.CO_CHITCHAT_GROUP, process.env.HANDLER_GROUP];
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
-const apiGPT = new ChatGPTAPI({ apiKey: process.env.OPENAI_API_KEY, debug: true });
+const apiGPT = new ChatGPTAPI({ apiKey: process.env.OPENAI_API_KEY });
 
 // Tracking conversation
 const CONVERSATIONS = [];
