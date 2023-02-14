@@ -65,10 +65,10 @@ buffer-fill@^1.0.0:
   resolved "https://registry.yarnpkg.com/buffer-fill/-/buffer-fill-1.0.0.tgz#f8f78b76789888ef39f205cd637f68e702122b2c"
   integrity sha512-T7zexNBwiiaCOGDg9xNX9PBmjrubblRkENuptryuI64URkXDFum9il/JGL8Lm8wYfAXpredVXXZz7eMHilimiQ==
 
-chatgpt@^4.3.2:
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/chatgpt/-/chatgpt-4.3.2.tgz#fff77e3733c5e062c5ffbfea754666f47a6ec75d"
-  integrity sha512-5+Kh0mdP/pDJTL3kA6C6Dp43EO8T8sILPJbbQwOu3J4dK+n/tYpSXsmG6VZkmitAVOffeTonXTGDJwslc66orw==
+chatgpt@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/chatgpt/-/chatgpt-4.4.0.tgz#b4c4a2a54b3861d07c129fe4a8000858d729c4e5"
+  integrity sha512-rS1F423hR5marIB7hvZ4KyczK9oFloWY+AR4WKIt+HLyiRgOOWv6V4olu1HvaoOayc5+A/N2WwX0SzuU1rI9Rg==
   dependencies:
     eventsource-parser "^0.0.5"
     gpt-3-encoder "^1.1.4"
