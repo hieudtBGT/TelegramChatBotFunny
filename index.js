@@ -4,14 +4,6 @@ import { Telegraf } from "telegraf";
 //import { ChatGPTAPI } from "chatgpt";
 import { ChatGPTUnofficialProxyAPI } from "chatgpt";
 
-async function example() {
-  const api = new ChatGPTUnofficialProxyAPI({
-    accessToken: process.env.OPENAI_ACCESS_TOKEN,
-  });
-
-  const res = await api.sendMessage("Hello World!");
-  console.log(res.text);
-}
 // --------------- IMPORT REGION --------------------------
 
 // --------------- DECLARE REGION --------------------------
@@ -21,7 +13,7 @@ const MY_HANDLER_GROUP = process.env.HANDLER_GROUP;
 const WHITE_LIST_CHAT_ID = [process.env.MY_ID, process.env.CO_CHITCHAT_GROUP, process.env.HANDLER_GROUP];
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
-const apiGPT = new ChatGPTUnofficialProxyAPI({ apiKey: process.env.OPENAI_API_KEY });
+const apiGPT = new ChatGPTUnofficialProxyAPI({ accessToken: process.env.OPENAI_API_KEY });
 
 // Tracking conversation
 const CONVERSATIONS = [];
