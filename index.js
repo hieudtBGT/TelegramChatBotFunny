@@ -13,7 +13,7 @@ const MY_HANDLER_GROUP = process.env.HANDLER_GROUP;
 const WHITE_LIST_CHAT_ID = [process.env.MY_ID, process.env.CO_CHITCHAT_GROUP, process.env.HANDLER_GROUP];
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
-const apiGPT = new ChatGPTUnofficialProxyAPI({ accessToken: process.env.OPENAI_API_KEY });
+const apiGPT = new ChatGPTUnofficialProxyAPI({ accessToken: process.env.ACCESS_TOKEN });
 
 // Tracking conversation
 const CONVERSATIONS = [];
