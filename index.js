@@ -77,7 +77,7 @@ bot.telegram.getMe().then((botInfo) => {
 
 // middleware
 bot.use(async (ctx, next) => {
-  console.log(`[LISTENING] ${getCurrentDateTime()} | ${ctx.message.chat.id}, ${ctx.message.chat.title}, ${ctx.message.chat.username} | ${ctx.message.text}`);
+  console.log(`[LISTENING] ${getCurrentDateTime()} | ${ctx.message.chat.id}, ${ctx.message.chat.username} | ${ctx.message.text}`);
   if (WHITE_LIST_CHAT_ID.includes(ctx.message.chat.id.toString()) === false) {
     await ctx.telegram.sendMessage(MY_HANDLER_GROUP, warningMessageToActiveGroup(ctx.message.from, ctx.message.text), { parse_mode: "Markdown" });
     return;
